@@ -18,7 +18,6 @@ struct Country *addCountry(struct Country *c_list, const char *name)
 {
 	int len = 0;
 	int i = 1;
-	int flag = 0;
 	while (c_list[len].name[0] != '\0') // Check the amount of countries in the list and if the country is already in the list
 	{
 		if (strcmp(c_list[len].name, name) == 0)
@@ -36,7 +35,7 @@ struct Country *addCountry(struct Country *c_list, const char *name)
 	arr[len].silver = 0;
 	arr[len].bronze = 0;
 	arr[i].name[0] = '\0';
-	printf("\Country added!\n");
+	printf("Country added!\n");
 	return arr;
 }
 
