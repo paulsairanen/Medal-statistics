@@ -18,8 +18,14 @@ struct Country *addCountry(struct Country *c_list, const char *name)
 {
 	int len = 0;
 	int i = 1;
-	while (c_list[len].name[0] != '\0') // Check the amount of countries in the list
+	int flag = 0;
+	while (c_list[len].name[0] != '\0') // Check the amount of countries in the list and if the country is already in the list
 	{
+		if (strcmp(c_list[len].name, name) == 0)
+		{
+			printf("This country has already been added!\n");
+			return c_list;
+		}
 		len++;
 		i++;
 	}
@@ -30,6 +36,7 @@ struct Country *addCountry(struct Country *c_list, const char *name)
 	arr[len].silver = 0;
 	arr[len].bronze = 0;
 	arr[i].name[0] = '\0';
+	printf("\Country added!\n");
 	return arr;
 }
 
@@ -172,7 +179,16 @@ int main(void)
 	char letter[2];
 	while (input[0] != 'Q')
 	{
-		printf("\nEnter a letter to select an action\nA: Add a country\nM: Update medal statistics\nL: Print medal statistics\nW: Save medal statistics\nO: Load a file\nQ: Exit program\n");
+		printf("\nEnter a letter and required parameters\n");
+		printf("---------------------------------------------------\n");
+		printf("Actions                       | Explanation\n");
+		printf("---------------------------------------------------\n");
+		printf("A [country name]              | Add a country\n");
+		printf("M [golds] [silvers] [bronzes] | Update medal statistics\n");
+		printf("L                             | Print medal statistics\n");
+		printf("W [filename]                  | Save medal statistics\n");
+		printf("O [filename]                  | Load a file\n");
+		printf("Q                             | Exit program\n");
 		fgets(input, sizeof(input), stdin); // Read the input of the user
 		if (input[0] == 'A')// Add country to the list
 		{
@@ -185,7 +201,6 @@ int main(void)
 			else
 			{
 				c_list = addCountry(c_list, countryname);
-				printf("\Country added!\n");
 			}
 		}
 		else if (input[0] == 'M') // Update the amount of medals to the given country
